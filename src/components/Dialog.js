@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button ,Input} from 'antd';
+const { TextArea } = Input;
 
 class Dialog extends React.Component {
     state = { visible: false }
@@ -25,14 +26,17 @@ class Dialog extends React.Component {
         <div>
           <Button type="primary" onClick={this.showModal}>新建</Button>
           <Modal
-            title="Basic Modal"
+            title="新建"
             visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
+            handleOk={this.handleOk}
+            handleCancel={this.handleCancel}
+            width={780}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <p>api地址：<Input placeholder="api地址" /></p>
+            <br/>
+            <p>接收参数：<Input placeholder="接收参数" /></p>
+            <br/>
+            <p>响应参数：<TextArea rows={5} placeholder="响应参数"/></p>
           </Modal>
         </div>
       );
