@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button ,Input} from 'antd';
+import $ from 'jquery';
 const { TextArea } = Input;
 
 class myModal extends React.Component{
@@ -9,7 +10,16 @@ class myModal extends React.Component{
       visible:this.props.visible
     }
   }
-  
+  save(){
+    console.log("sbggg");
+    $.ajax({
+      url:'http://localhost:4000/save',
+      type:"get",
+      sucess:function(data){
+        console.log(data)
+      }
+    });
+  }
   toggleShow(){
     this.setState({visible:!this.state.visible});
   }
@@ -20,7 +30,7 @@ class myModal extends React.Component{
               title={this.props.title}
               visible={this.state.visible}
               width={680}
-              onOk={this.toggleShow.bind(this)}
+              onOk={this.save.bind(this)}
               onCancel={this.toggleShow.bind(this)}
             >
               <p>api地址：<Input placeholder="api地址" defaultValue={this.props.title}/></p>

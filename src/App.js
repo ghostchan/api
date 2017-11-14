@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Layout,Button} from 'antd';
-import Modal from './components/myModal'
-import Tables from './components/Tables'
+import Modal from './components/myModal';
+import Tables from './components/Tables';
+
 const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
