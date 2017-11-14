@@ -6,34 +6,22 @@ const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
   state={
-    visible:false,
     title:""
   }
   showModal=()=>{
-    this.setState({visible:true,title:"新建44"});
-  }
-  handleOk = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
-  handleCancel = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
+    this.refs.mymodal.toggleShow();
+    this.setState({title:"新建"});
   }
   render(){
     return (
       <Layout>
       <Header style={{ position: 'fixed', width: '100%' }}>
         <Button type="primary" onClick={this.showModal}>新建</Button>
-        <Modal 
+        <Modal
+        ref='mymodal' 
         visible={this.state.visible} 
         title={this.state.title}
-        handleOk={this.handleOk}
-        handleCancel={this.handleCancel}/>
+        />
       </Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>
       

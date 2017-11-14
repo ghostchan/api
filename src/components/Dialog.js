@@ -32,7 +32,7 @@ class Dialog extends React.Component {
             handleCancel={this.handleCancel}
             width={780}
           >
-            <p>api地址：<Input placeholder="api地址" /></p>
+            <p>api地址：<Input placeholder="api地址"/></p>
             <br/>
             <p>接收参数：<Input placeholder="接收参数" /></p>
             <br/>
