@@ -50,7 +50,7 @@ class Tables extends React.Component {
     ];
   }
   showModal = key => {
-    console.log(key);
+    // console.log(key);
     this.refs.mymodal.toggleShow();
     this.setState({ title: "修改" });
   };
