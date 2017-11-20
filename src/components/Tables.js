@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Table, Icon, Button } from "antd";
+import React from "react";
+import { Table, Button } from "antd";
 import Modal from "./myModal";
 
 class Tables extends React.Component {

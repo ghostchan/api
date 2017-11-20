@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Layout,Button} from 'antd';
 import Modal from './components/myModal';
 import Tables from './components/Tables';

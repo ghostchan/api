@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Modal, Button ,Input} from 'antd';
+import React from 'react';
+import { Modal, Input} from 'antd';
 import $ from 'jquery';
 const { TextArea } = Input;
 
@@ -13,7 +13,7 @@ class myModal extends React.Component{
   save(){
     console.log("sbggg");
     $.ajax({
-      url:'http://localhost:4000/save',
+      url:'/save',
       type:"get",
       sucess:function(data){
         console.log(data)
