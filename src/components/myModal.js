@@ -13,8 +13,8 @@ class myModal extends React.Component{
   save(){
     console.log("sbggg");
     $.ajax({
-      url:'/save',
-      type:"get",
+      url:'/api/add',
+      type:"POST",
       sucess:function(data){
         console.log(data)
       }
