@@ -3,5 +3,5 @@ module.exports={
     user     : 'root',
     password:'2008',
     port:   '3306',
-    database: 'ExpressDB'
+    database: 'api'
 }

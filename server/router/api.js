@@ -3,8 +3,7 @@ const router = express.Router();
 const querystring = require("querystring");
 const mysql = require("mysql");
 const dbConfig = require("../db/config");
-//创建一个connection
-var connection = mysql.createConnection(dbConfig);
+
 
 router.post("/add", function(req, res) {
   var str = "";
@@ -14,7 +13,9 @@ router.post("/add", function(req, res) {
   });
   req.on("end", function() {
     post = querystring.parse(str);
-
+    console.log(post);
+    //创建一个connection
+    var connection = mysql.createConnection(dbConfig);
     //创建一个connection
     connection.connect(function(err) {
       if (err) {
@@ -24,17 +25,18 @@ router.post("/add", function(req, res) {
       console.log("[connection connect]  succeed!");
     });
 
-    var addApi = "insert into user(uid,userName) values(?,?)";
-    var param = [22, 100];
+    var addApi = "insert into params(url,req,res) values(?,?,?)";
+    var param = [post.apiUrl, post.reqParam,post.resParam];
     connection.query(addApi, param, function(error, result) {
       if (error) {
         console.log(error.message);
       } else {
-        console.log("添加失败");
+        console.log("添加成功");
+        connection.end();
       }
     });
 
-    // connection.end();
+    
     res.send(post);
   });
 });
@@ -42,7 +44,7 @@ router.post("/update", function(req, res) {
   res.send("修改成功");
 });
 router.post("/delete", function(req, res) {
-  res.send("删除成功la");
+  res.send("删除成功");
 });
 
 module.exports = router;
