@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Input} from 'antd';
+import { Modal, Input,message} from 'antd';
 import $ from 'jquery';
 const { TextArea } = Input;
 
@@ -29,6 +29,8 @@ class myModal extends React.Component{
     });
   }
   save(){
+    var _this=this;
+    _this.toggleShow();
     // console.log(this.state.apiUrl.trim(),this.state.reqParam,this.state.resParam);
     $.ajax({
       url:'/api/add',
@@ -39,7 +41,8 @@ class myModal extends React.Component{
         resParam:this.state.resParam.trim()
       },
       success:function(data){
-        console.log(data.apiUrl);
+        _this.props.getList();
+        message.success('增加成功！');
       }
     });
   }
@@ -47,6 +50,7 @@ class myModal extends React.Component{
     this.setState({visible:!this.state.visible});
   }
     render() {
+      console.log(this.props.getList);
         return (
           <div>
             <Modal

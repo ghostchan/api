@@ -1,11 +1,12 @@
 import React from "react";
 import { Table, Button } from "antd";
 import Modal from "./myModal";
-
+import $ from 'jquery';
 class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      list:[]
     };
     this.columns = [
       {
@@ -43,10 +44,24 @@ class Tables extends React.Component {
   delete = key => {
     console.log("删除："+key);
   }
+  getList(){
+    var _this=this;
+    $.ajax({
+      url:'/api/list',
+      type:"POST",
+      data:{},
+      success:function(data){
+        _this.setState({list:data});
+      }
+    });
+  }
+  componentWillMount(){
+    this.getList();
+  }
   render() {
     
     var arr=[];
-    var list=this.props.list||[];
+    var list=this.state.list||[];
     // console.log(list);
     list.forEach(function(item){
       var temp={};
@@ -62,7 +77,7 @@ class Tables extends React.Component {
           dataSource={arr}
           bordered={true}
         />
-        <Modal ref="mymodal" title="修改" visible={false} />
+        <Modal ref="mymodal" title="修改" visible={false} getList={this.getList}/>
       </div>
     );
   }

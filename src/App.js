@@ -8,20 +8,9 @@ const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
   state={
-    title:"",
-    list:"",
+    title:""
   }
-  componentWillMount(){
-    var _this=this;
-    $.ajax({
-      url:'/api/list',
-      type:"POST",
-      data:{},
-      success:function(data){
-        _this.setState({list:data});
-      }
-    });
-  }
+ 
   showModal=()=>{
     this.refs.mymodal.toggleShow();
     this.setState({title:"新建"});
@@ -40,7 +29,7 @@ class App extends React.Component {
       </Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>
       
-        <Tables list={this.state.list}/>
+        <Tables/>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Jinn Design ©2018 Created by Jinn
