@@ -17,7 +17,7 @@ router.post("/list", function(req, res) {
   });
 
   var selApi = "select id,url from params order by id desc";
-  connection.query(selApi,function(error, result) {
+  connection.query(selApi, function(error, result) {
     if (error) {
       console.log(error.message);
     } else {

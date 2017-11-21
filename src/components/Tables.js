@@ -1,12 +1,12 @@
 import React from "react";
 import { Table, Button } from "antd";
 import Modal from "./myModal";
-import $ from 'jquery';
+import $ from "jquery";
 class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list:[]
+      list: []
     };
     this.columns = [
       {
@@ -25,10 +25,7 @@ class Tables extends React.Component {
             >
               修改
             </Button>&nbsp;
-            <Button
-              type="primary"
-              onClick={this.delete.bind(this, record.key)}
-            >
+            <Button type="primary" onClick={this.delete.bind(this, record.key)}>
               删除
             </Button>
           </span>
@@ -42,42 +39,36 @@ class Tables extends React.Component {
     this.setState({ title: "修改" });
   };
   delete = key => {
-    console.log("删除："+key);
-  }
-  getList(){
-    var _this=this;
+    console.log("删除：" + key);
+  };
+  getList() {
+    var _this = this;
     $.ajax({
-      url:'/api/list',
-      type:"POST",
-      data:{},
-      success:function(data){
-        _this.setState({list:data});
+      url: "/api/list",
+      type: "POST",
+      data: {},
+      success: function(data) {
+        _this.setState({ list: data });
       }
     });
   }
-  componentWillMount(){
+  componentWillMount() {
     this.getList();
   }
   render() {
-    
-    var arr=[];
-    var list=this.state.list||[];
+    var arr = [];
+    var list = this.state.list || [];
     // console.log(list);
-    list.forEach(function(item){
-      var temp={};
-      temp["key"]=item.id;
-      temp["url"]=item.url;
+    list.forEach(function(item) {
+      var temp = {};
+      temp["key"] = item.id;
+      temp["url"] = item.url;
       arr.push(temp);
     });
     console.log(arr);
     return (
       <div>
-        <Table
-          columns={this.columns}
-          dataSource={arr}
-          bordered={true}
-        />
-        
+        <Table columns={this.columns} dataSource={arr} bordered={true} />
       </div>
     );
   }
