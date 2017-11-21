@@ -77,7 +77,7 @@ class Tables extends React.Component {
           dataSource={arr}
           bordered={true}
         />
-        <Modal ref="mymodal" title="修改" visible={false} getList={this.getList}/>
+        
       </div>
     );
   }

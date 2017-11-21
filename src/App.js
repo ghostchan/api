@@ -1,18 +1,23 @@
 import React from 'react';
 import { Layout,Button} from 'antd';
-import Modal from './components/myModal';
-import Tables from './components/Tables';
-import $ from 'jquery';
 
+import Tables from './components/Tables';
+
+import $ from 'jquery';
+import MyModal from './components/myModal.js';
 const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
   state={
     title:""
   }
- 
+
+  getList(){
+    this.refs.mytable.getList();
+  }
+
   showModal=()=>{
-    this.refs.mymodal.toggleShow();
+    this.refs.mymodel.toggleShow();
     this.setState({title:"新建"});
   }
   render(){
@@ -21,15 +26,11 @@ class App extends React.Component {
       <Layout>
       <Header style={{ position: 'fixed', width: '100%' }}>
         <Button type="primary" onClick={this.showModal}>新建</Button>
-        <Modal
-        ref='mymodal' 
-        visible={this.state.visible} 
-        title={this.state.title}
-        />
+        <MyModal ref='mymodel' visible={false} title='create' getList={this.getList.bind(this)}></MyModal>
       </Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>
       
-        <Tables/>
+        <Tables ref='mytable'/>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Jinn Design ©2018 Created by Jinn

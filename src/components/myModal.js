@@ -6,11 +6,15 @@ const { TextArea } = Input;
 class myModal extends React.Component{
   constructor(props){
     super(props);
+    debugger;
+    console.info(this.props.getList);
     this.state={
       visible:this.props.visible,
+      title: this.props.title,
       apiUrl:'',
       reqParam:'',
-      resParam:''
+      resParam:'',
+      getList:this.props.getList
     }
   }
   handleApiUrl(event){
@@ -24,14 +28,17 @@ class myModal extends React.Component{
     });
   }
   handleResParam(event){
+    debugger;
     this.setState({
         resParam: event.target.value
     });
   }
   save(){
+    debugger;
+    console.info(this.props.getList);
     var _this=this;
+    console.log(_this.props.getList);
     _this.toggleShow();
-    // console.log(this.state.apiUrl.trim(),this.state.reqParam,this.state.resParam);
     $.ajax({
       url:'/api/add',
       type:"POST",
@@ -49,12 +56,20 @@ class myModal extends React.Component{
   toggleShow(){
     this.setState({visible:!this.state.visible});
   }
+
+  handleTestClick(){
+    if(this.props.getList){
+      this.props.getList();
+      alert('this.props.getList.run');
+    }
+  }
     render() {
-      console.log(this.props.getList);
+      console.log(this.state.getList);
         return (
           <div>
-            <Modal
-              title={this.props.title}
+            <a onClick={this.handleTestClick.bind(this)}>test</a>
+            <Modal ref='mymodel'
+              title={this.state.title}
               visible={this.state.visible}
               width={680}
               onOk={this.save.bind(this)}

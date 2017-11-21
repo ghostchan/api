@@ -16,7 +16,7 @@ router.post("/list", function(req, res) {
     console.log("[connection connect]  succeed!");
   });
 
-  var selApi = "select id,url from params";
+  var selApi = "select id,url from params order by id desc";
   connection.query(selApi,function(error, result) {
     if (error) {
       console.log(error.message);
