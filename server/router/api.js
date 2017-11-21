@@ -1,16 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const querystring=require("querystring");
+const querystring = require("querystring");
+const mysql = require("mysql");
+const dbConfig = require("../db/config");
+//创建一个connection
+var connection = mysql.createConnection(dbConfig);
 
 router.post("/add", function(req, res) {
-  var str="";
-  var post="";
-  req.on("data",function(data){
-    str+=data;
+  var str = "";
+  var post = "";
+  req.on("data", function(data) {
+    str += data;
   });
-  req.on("end",function(){
-   post=querystring.parse(str);
-   res.send(post);
+  req.on("end", function() {
+    post = querystring.parse(str);
+
+    //创建一个connection
+    connection.connect(function(err) {
+      if (err) {
+        console.log("[query] - :" + err);
+        return;
+      }
+      console.log("[connection connect]  succeed!");
+    });
+
+    var addApi = "insert into user(uid,userName) values(?,?)";
+    var param = [22, 100];
+    connection.query(addApi, param, function(error, result) {
+      if (error) {
+        console.log(error.message);
+      } else {
+        console.log("添加失败");
+      }
+    });
+
+    // connection.end();
+    res.send(post);
   });
 });
 router.post("/update", function(req, res) {
