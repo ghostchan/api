@@ -2,12 +2,23 @@ import React from 'react';
 import { Layout,Button} from 'antd';
 import Modal from './components/myModal';
 import Tables from './components/Tables';
+import $ from 'jquery';
 
 const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
   state={
     title:""
+  }
+  componentWillMount(){
+    $.ajax({
+      url:'/api/list',
+      type:"POST",
+      data:{},
+      success:function(data){
+        console.log(data);
+      }
+    });
   }
   showModal=()=>{
     this.refs.mymodal.toggleShow();

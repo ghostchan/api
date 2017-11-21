@@ -4,7 +4,30 @@ const querystring = require("querystring");
 const mysql = require("mysql");
 const dbConfig = require("../db/config");
 
+router.post("/list", function(req, res) {
+  //创建一个connection
+  var connection = mysql.createConnection(dbConfig);
+  //创建一个connection
+  connection.connect(function(err) {
+    if (err) {
+      console.log("[query] - :" + err);
+      return;
+    }
+    console.log("[connection connect]  succeed!");
+  });
 
+  var selApi = "select * from params";
+  connection.query(selApi,function(error, result) {
+    if (error) {
+      console.log(error.message);
+    } else {
+      console.log("查询成功");
+      console.log(result);
+      connection.end();
+      res.send(result);
+    }
+  });
+});
 router.post("/add", function(req, res) {
   var str = "";
   var post = "";
@@ -26,7 +49,7 @@ router.post("/add", function(req, res) {
     });
 
     var addApi = "insert into params(url,req,res) values(?,?,?)";
-    var param = [post.apiUrl, post.reqParam,post.resParam];
+    var param = [post.apiUrl, post.reqParam, post.resParam];
     connection.query(addApi, param, function(error, result) {
       if (error) {
         console.log(error.message);
@@ -36,7 +59,6 @@ router.post("/add", function(req, res) {
       }
     });
 
-    
     res.send(post);
   });
 });
