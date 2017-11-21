@@ -8,15 +8,17 @@ const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
   state={
-    title:""
+    title:"",
+    list:"",
   }
   componentWillMount(){
+    var _this=this;
     $.ajax({
       url:'/api/list',
       type:"POST",
       data:{},
       success:function(data){
-        console.log(data);
+        _this.setState({list:data});
       }
     });
   }
@@ -25,6 +27,7 @@ class App extends React.Component {
     this.setState({title:"新建"});
   }
   render(){
+    // console.log(this.state.list);
     return (
       <Layout>
       <Header style={{ position: 'fixed', width: '100%' }}>
@@ -37,7 +40,7 @@ class App extends React.Component {
       </Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>
       
-        <Tables/>
+        <Tables list={this.state.list}/>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Jinn Design ©2018 Created by Jinn

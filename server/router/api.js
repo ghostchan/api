@@ -16,13 +16,13 @@ router.post("/list", function(req, res) {
     console.log("[connection connect]  succeed!");
   });
 
-  var selApi = "select * from params";
+  var selApi = "select id,url from params";
   connection.query(selApi,function(error, result) {
     if (error) {
       console.log(error.message);
     } else {
-      console.log("查询成功");
-      console.log(result);
+      // console.log("查询成功");
+      // console.log(result);
       connection.end();
       res.send(result);
     }

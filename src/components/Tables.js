@@ -6,26 +6,12 @@ class Tables extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-          key: "1",
-          api: "/api/manage/listInfo"
-        },
-        {
-          key: "2",
-          api: "/api/manage/order/priceList"
-        },
-        {
-          key: "3",
-          api: "/api/manage/company/invoice/delete"
-        }
-      ]
     };
     this.columns = [
       {
         title: "API地址",
-        dataIndex: "api",
-        key: "api"
+        dataIndex: "url",
+        key: "url"
       },
       {
         title: "操作",
@@ -58,11 +44,22 @@ class Tables extends React.Component {
     console.log("删除："+key);
   }
   render() {
+    
+    var arr=[];
+    var list=this.props.list||[];
+    // console.log(list);
+    list.forEach(function(item){
+      var temp={};
+      temp["key"]=item.id;
+      temp["url"]=item.url;
+      arr.push(temp);
+    });
+    console.log(arr);
     return (
       <div>
         <Table
           columns={this.columns}
-          dataSource={this.state.data}
+          dataSource={arr}
           bordered={true}
         />
         <Modal ref="mymodal" title="修改" visible={false} />
