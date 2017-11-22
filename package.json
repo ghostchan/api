@@ -20,6 +20,9 @@
   "proxy": {
     "/api/": {
       "target": "http://localhost:4000"
+    },
+    "/mock/": {
+      "target": "http://localhost:4000"
     }
   }
 }

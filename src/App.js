@@ -31,7 +31,7 @@ class App extends React.Component {
           <MyModal
             ref="mymodel"
             visible={false}
-            title="create"
+            title={this.state.title}
             getList={this.getList.bind(this)}
           />
         </Header>
